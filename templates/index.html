@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for task in wi.tasks %}
+        <p>Task {{ task.title }}</p>
+    {% endfor %}
+    {% if wi.bugs %}
+        <p>Bugs: {{ wi.bugs }}</p>
+    {% endif %}
+    <p>CRs: {{ wi.crs }}</p>
+    <p>BRQs: {{ wi.brqs }}</p>
+{% endblock %}

@@ -1,12 +1,14 @@
-from flask import Flask
-from tfsclient import tfsclient
+from flask import Flask, render_template
+from app_modules.wigetter import IndexWorkItems
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route('/index')
+def index():
+    wi = IndexWorkItems()
+    return render_template('index.html', title='Main', wi=wi)
 
 
 if __name__ == '__main__':
