@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from app_modules.wigetter import IndexWorkItems
 
 app = Flask(__name__)
 
@@ -7,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    wi = IndexWorkItems()
+    wi = IndexWorkItems() # TODO: переписать на создание объекта WorkItems с использованием запросов
     return render_template('index.html', title='Main', wi=wi)
 
 

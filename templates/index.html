@@ -1,8 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for task in wi.tasks %}
-        <p>Task {{ task.title }}</p>
-    {% endfor %}
+
+    <div class="container-fluid justify-content-center my-5 px-4 text-light">
+        <div class="container-fluid">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" fill="currentColor" class="bi bi-list-task text-warning me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                    <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                    <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                </svg>
+                New tasks: {{ tasks_number }}</h2>
+        </div>
+        {% if wi.tasks %}
+            <div class="container-fluid table-responsive">
+                <table class="table table-dark table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Iteration</th>
+                        <th>Expected Resolve Date</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for task in wi.tasks %}
+                            <tr>
+                                <td>{{ task.id }}</td>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.fields. }}</td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+
     {% if wi.bugs %}
         <p>Bugs: {{ wi.bugs }}</p>
     {% endif %}
