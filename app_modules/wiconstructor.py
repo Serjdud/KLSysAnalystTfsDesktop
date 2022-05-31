@@ -1,12 +1,8 @@
 import datetime
-import json
 
 from pytfsclient.tfs_workitem_model import TfsWorkitem
 
 from app_modules.tfsclient import tfsclient
-
-with open('queries.json') as queries:
-    QUERIES = json.load(queries)
 
 
 class User:
@@ -44,6 +40,8 @@ class WorkItem:
         self.analysis_ready_date = self.get_date_from_tfsstrdate(wi['KL.AnalysisReadyDate'])
         self.resolve_expected_date = self.get_date_from_tfsstrdate(wi['KL.RND.ExpectedResolveDate'])
         self.resolve_ready_date = self.get_date_from_tfsstrdate(wi['KL.RND.ExpectedDevResolveDate'])
+        self.estimation_expected_date = self.get_date_from_tfsstrdate(wi['KL.EstimationExpectedDate'])
+        self.estimation_ready_date = self.get_date_from_tfsstrdate(wi['KL.EstimationReadyDate'])
 
     def __repr__(self):
         return f"Id: {self.id}, Type: {self.type}, Title: {self.title}"
@@ -59,43 +57,35 @@ class WorkItem:
 
 
 class WorkItems:
-    def __init__(self, query_name: str=None, workitems: list=None):
-        if query_name:
-            workitems = self.get_workitems_from_wiql(query_name)
-        elif workitems:
+    def __init__(self, query: str=None, _workitems: list=None):
+        if query and not _workitems:
+            _workitems = self.get_workitems_from_wiql(query)
+        elif _workitems and not query:
             pass
         else:
-            raise ValueError('At least one must be submitted: query_name or workitems')
+            raise ValueError('One argument must be submitted: query_name or workitems')
 
         self.tasks = []
         self.bugs = []
         self.crs = []
         self.brqs = []
 
-        for workitem in workitems:
-            wi = WorkItem(workitem)
-            if wi.type == 'Task':
-                self.tasks.append(wi)
-            elif wi.type == 'Requirement':
-                self.brqs.append(wi)
-            elif wi.type == 'Change Request':
-                self.crs.append(wi)
-            elif wi.type == 'Bug':
-                self.bugs.append(wi)
+        if _workitems:
+            for _workitem in _workitems:
+                _wi = WorkItem(_workitem)
+                if _wi.type == 'Task':
+                    self.tasks.append(_wi)
+                elif _wi.type == 'Requirement':
+                    self.brqs.append(_wi)
+                elif _wi.type == 'Change Request':
+                    self.crs.append(_wi)
+                elif _wi.type == 'Bug':
+                    self.bugs.append(_wi)
 
-    def get_workitems_from_wiql(self, query_name: str):
-        wiql_result = tfsclient.wi_client.run_wiql(QUERIES[query_name])
-        if wiql_result.is_empty:
-            workitems = None
+    def get_workitems_from_wiql(self, query: str):
+        _wiql_result = tfsclient.wi_client.run_wiql(query)
+        if _wiql_result.is_empty:
+            _workitems = None
         else:
-            workitems = wiql_result.workitems
-        return workitems
-
-
-# class IndexWorkItems(WorkItems):
-#     def __init__(self):
-#         self.tasks = self.get_workitems_from_wiql('main_window_tasks_query')
-#         self.bugs = self.get_workitems_from_wiql('main_window_bugs_query')
-#         self.crs = self.get_workitems_from_wiql('main_window_crs_query')
-#         self.brqs = self.get_workitems_from_wiql('main_window_brqs_query')
-# TODO: этот класс не нужен, перенести запросы в route
+            _workitems = _wiql_result.workitems
+        return _workitems

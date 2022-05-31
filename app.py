@@ -1,14 +1,11 @@
-from flask import Flask, render_template
+import json
+
+from flask import Flask
+
 
 app = Flask(__name__)
 
-
-@app.route('/')
-@app.route('/index')
-def index():
-    wi = IndexWorkItems() # TODO: переписать на создание объекта WorkItems с использованием запросов
-    return render_template('index.html', title='Main', wi=wi)
-
+from app_modules import routes, jinja_filters
 
 if __name__ == '__main__':
     app.run()
