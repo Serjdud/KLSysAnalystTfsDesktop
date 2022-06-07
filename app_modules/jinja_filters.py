@@ -9,11 +9,3 @@ def compare_date_with_today(date: datetime.date) -> bool:
         return True
     else:
         return False
-
-
-@app.template_filter('is_critical_bug')
-def if_critical_bug(bug_priority):
-    if bug_priority and bug_priority == 1:
-        return True
-    else:
-        return False

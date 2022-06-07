@@ -2,7 +2,7 @@ import datetime
 
 from pytfsclient.tfs_workitem_model import TfsWorkitem
 
-from app_modules.tfsclient import tfsclient
+from app_modules.tfs_client import tfsclient
 
 
 class User:
