@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% with prio1_bugs=own_bugs_1prio,prio2_bugs=own_bugs_2prio, prio3_bugs=own_bugs_3prio %}
+        {% include 'bugs/1_2_prio_bugs.html' %}
+        {% include 'bugs/3_prio_bugs.html' %}
+    {% endwith %}
+{% endblock %}

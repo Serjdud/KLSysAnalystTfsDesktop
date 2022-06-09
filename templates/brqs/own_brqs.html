@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with new_brqs=own_new_brqs, active_brqs=own_active_brqs %}
+        {% include 'brqs/new_brqs.html' %}
+        {% include 'brqs/active_brqs.html' %}
+    {% endwith %}
+
+{% endblock %}

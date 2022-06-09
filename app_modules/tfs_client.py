@@ -2,7 +2,7 @@ import configparser
 from pytfsclient.tfs_client_factory import TfsClientFactory
 
 
-TFS_CONFIG_FILE = 'tfsconfig.ini'
+TFS_CONFIG_FILE = 'configs/tfsconfig.ini'
 TFS_CONFIG_NAME = 'DEFAULT'
 
 

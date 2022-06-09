@@ -51,4 +51,4 @@ class Queries:
         return ', '.join(self.queries.keys())
 
 
-QUERIES = Queries(json_filename='queries.json')
+QUERIES = Queries(json_filename='configs/queries.json')

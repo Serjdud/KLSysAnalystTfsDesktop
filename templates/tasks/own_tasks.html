@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% with new_tasks=own_new_tasks, overdue_tasks=own_overdue_tasks, active_tasks=own_active_tasks %}
+        {% include 'tasks/overdue_tasks.html' %}
+        {% include 'tasks/new_tasks.html' %}
+        {% include 'tasks/active_tasks.html' %}
+    {% endwith %}
+{% endblock %}

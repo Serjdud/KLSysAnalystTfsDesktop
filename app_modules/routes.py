@@ -8,18 +8,60 @@ from app_modules.wiql_query_constructor import QUERIES
 @app.route('/')
 @app.route('/index')
 def index():
-    my_new_tasks = WorkItems(QUERIES['my_new_tasks']).tasks
-    my_overdue_tasks = WorkItems(QUERIES['my_overdue_tasks']).tasks
-    my_bugs_1prio = WorkItems(QUERIES['my_bugs_1prio']).bugs
-    my_bugs_2prio = WorkItems(QUERIES['my_bugs_2prio']).bugs
-    my_new_crs = WorkItems(QUERIES['my_new_crs']).crs
-    my_new_brqs = WorkItems(QUERIES['my_new_brqs']).brqs
-    my_overdue_crs = WorkItems(QUERIES['my_overdue_crs']).crs
+    own_new_tasks = WorkItems(QUERIES['own_new_tasks']).tasks
+    own_overdue_tasks = WorkItems(QUERIES['own_overdue_tasks']).tasks
+    own_bugs_1prio = WorkItems(QUERIES['own_bugs_1prio']).bugs
+    own_bugs_2prio = WorkItems(QUERIES['own_bugs_2prio']).bugs
+    own_new_crs = WorkItems(QUERIES['own_new_crs']).crs
+    own_new_brqs = WorkItems(QUERIES['own_new_brqs']).brqs
+    own_overdue_crs = WorkItems(QUERIES['own_overdue_crs']).crs
     return render_template('index.html', title='Main',
-                           my_new_tasks=my_new_tasks,
-                           my_overdue_tasks=my_overdue_tasks,
-                           my_bugs_1prio=my_bugs_1prio,
-                           my_bugs_2prio=my_bugs_2prio,
-                           my_new_crs=my_new_crs,
-                           my_overdue_crs=my_overdue_crs,
-                           my_new_brqs=my_new_brqs)
+                           own_new_tasks=own_new_tasks,
+                           own_overdue_tasks=own_overdue_tasks,
+                           own_bugs_1prio=own_bugs_1prio,
+                           own_bugs_2prio=own_bugs_2prio,
+                           own_new_crs=own_new_crs,
+                           own_overdue_crs=own_overdue_crs,
+                           own_new_brqs=own_new_brqs)
+
+
+@app.route('/bugs')
+def own_bugs():
+    own_bugs_1prio = WorkItems(QUERIES['own_bugs_1prio']).bugs
+    own_bugs_2prio = WorkItems(QUERIES['own_bugs_2prio']).bugs
+    own_bugs_3prio = WorkItems(QUERIES['own_bugs_3prio']).bugs
+    return render_template('bugs/own_bugs.html', title='Bugs',
+                           own_bugs_1prio=own_bugs_1prio,
+                           own_bugs_2prio=own_bugs_2prio,
+                           own_bugs_3prio=own_bugs_3prio)
+
+
+@app.route('/tasks')
+def own_tasks():
+    own_new_tasks = WorkItems(QUERIES['own_new_tasks']).tasks
+    own_overdue_tasks = WorkItems(QUERIES['own_overdue_tasks']).tasks
+    own_active_tasks = WorkItems(QUERIES['own_active_tasks']).tasks
+    return render_template('tasks/own_tasks.html', title='Tasks',
+                           own_new_tasks=own_new_tasks,
+                           own_overdue_tasks=own_overdue_tasks,
+                           own_active_tasks=own_active_tasks)
+
+
+@app.route('/crs')
+def own_crs():
+    own_new_crs = WorkItems(QUERIES['own_new_crs']).crs
+    own_overdue_crs = WorkItems(QUERIES['own_overdue_crs']).crs
+    own_active_crs = WorkItems(QUERIES['own_active_crs']).crs
+    return render_template('crs/own_crs.html', title='CRs',
+                           own_new_crs=own_new_crs,
+                           own_overdue_crs=own_overdue_crs,
+                           own_active_crs=own_active_crs)
+
+
+@app.route('/brqs')
+def own_brqs():
+    own_new_brqs = WorkItems(QUERIES['own_new_brqs']).brqs
+    own_active_brqs = WorkItems(QUERIES['own_active_brqs']).brqs
+    return render_template('brqs/own_brqs.html', title='BRQs',
+                           own_new_brqs=own_new_brqs,
+                           own_active_brqs=own_active_brqs)

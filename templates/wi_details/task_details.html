@@ -1,0 +1,11 @@
+{% extends 'wi_details/wi_details_base.html' %}
+
+{% with wi=task %}
+    {% block modal-header %}
+        {{ super() }}
+    {% endblock %}
+{% endwith %}
+
+{% block modal-body %}
+{#  TODO: написать основной блок для детального просмотра таски  #}
+{% endblock %}

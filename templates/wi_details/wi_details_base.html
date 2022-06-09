@@ -1,0 +1,22 @@
+<div id="wiDetails" class="modal" tabindex="-1" aria-labelledby="wiDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header .justify-content-start">
+                {% block modal-header %}
+                    <h5 class="modal-title me-auto" id="wiDetailsLabel">{{wi.id}} {{ wi.title }}</h5>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info">Copy link</button>
+                        <button type="button" class="btn btn-primary"><a href="{{ wi.url }}" target="_blank">Open in TFS</a></button>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {% endblock %}
+            </div>
+            <div class="modal-body">
+                {% block modal-body %}{% endblock %}
+            </div>
+            <div class="modal-footer">
+                {% block modal-footer %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% with overdue_crs=own_overdue_crs, new_crs=own_new_crs, active_crs=own_active_crs %}
+        {% include 'crs/overdue_crs.html' %}
+        {% include 'crs/new_crs.html' %}
+        {% include 'crs/active_crs.html' %}
+    {% endwith %}
+
+{% endblock %}

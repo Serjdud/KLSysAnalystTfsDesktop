@@ -1,0 +1,23 @@
+{% if prio3_bugs %}
+    <div class="container-fluid table-responsive">
+        <table class="table table-dark table-striped table-hover">
+            <caption class="caption-top text-light">Third prio bugs:</caption>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Priority</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for bug in prio3_bugs %}
+                    <tr>
+                        <td>{{ bug.id }}</td>
+                        <td>{{ bug.title }}</td>
+                        <td>{{ bug.priority }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
